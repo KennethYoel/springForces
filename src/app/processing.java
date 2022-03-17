@@ -11,7 +11,9 @@ public class processing extends PApplet {
 		size(600, 400);
 	}
     // Properties:
-    int y = 250;
+    int xPos = 300;
+    int yPos = 250;
+    int dimension = 32;
     double velocity = 0.0;
     double restLength = 200;
     double k = 0.01;
@@ -25,14 +27,15 @@ public class processing extends PApplet {
 		background(112, 50, 126);
         noStroke();
         fill(45, 197, 244);
-        circle(300, y, 64);
+        circle(xPos, yPos, dimension);
 
-        double x = y - restLength;
+        double x = yPos - restLength;
         double force = -k * x;
 
         // F(orce) = M(ass) * A(cceleration); whereas M = 1:
         velocity += force;
-        y += velocity;
+        yPos += velocity;
+        //dimension += velocity;
 
         // Adding some dampening simulating friction, will lose 1% of its velocity at every frame:
         velocity *= 0.99;
