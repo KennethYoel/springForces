@@ -12,31 +12,41 @@ public class processing extends PApplet {
 		size(600, 400);
 	}
     // Properties:
-    int anchorDimension = 16;
     int theBobDimension = 32;
     PVector anchor, theBob;
     PVector velocity;
+    PVector gravity;
     float restLength = 200;
     float k = (float) 0.01;
 
 	// Identical use to setup in Processing IDE except for size():
 	public void setup() {
         rectMode(CENTER);
-		// xPos is the anchor:
+		// xPos and yPos of the anchor:
         anchor = new PVector(300, 0);
-        // yPos is the the bob, where the mass is concentrated at a single point:
+        // xPos and yPos of the the bob, where the mass is concentrated at a single point:
         theBob = new PVector(300, 250);
         velocity = new PVector(0, 0);
+        gravity = new PVector(0, (float)0.1);
 	}
 	// Identical use to draw in Processing IDE:
 	public void draw() {
 		background(112, 50, 126);
+        strokeWeight(3);
         stroke(255);
+        // The spring:
         line(anchor.x, anchor.y, theBob.x, theBob.y);
-        noStroke();
         fill(45, 197, 244);
-        square(anchor.x, anchor.y, anchorDimension);
-        circle(anchor.x, theBob.y, theBobDimension);
+        // The anchor:
+        triangle(anchor.x -10, anchor.y, anchor.x + 10, anchor.y, anchor.x, anchor.y + 20);
+        // The bob:
+        circle(theBob.x, theBob.y, theBobDimension);
+
+        if(mousePressed) {
+            theBob.x = mouseX;
+            theBob.y = mouseY;
+            velocity.set(0, 0);
+        }
 
         // Unit vector pointing towards the bob:
         PVector force = PVector.sub(theBob, anchor);
@@ -51,6 +61,7 @@ public class processing extends PApplet {
 
         // F(orce) = M(ass) * A(cceleration); whereas M = 1:
         velocity.add(force);
+        velocity.add(gravity);
         theBob.add(velocity);
         //theBobDimension += velocity;
 
