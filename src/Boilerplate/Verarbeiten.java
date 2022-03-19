@@ -1,4 +1,4 @@
-package app;
+package Boilerplate;
 import processing.core.*;
 //import processing.core.PVector;
 
@@ -6,7 +6,7 @@ public class Verarbeiten extends PApplet {
 
     // The argument passed to main must match the class name:
 	public static void main(String[] args) {
-		PApplet.main("app.Verarbeiten");
+		PApplet.main("Boilerplate.Verarbeiten");
 	}
 
     // Properties:
