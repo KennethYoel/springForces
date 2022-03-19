@@ -1,16 +1,14 @@
 package app;
-import processing.core.PApplet;
-import processing.core.PVector;
+import processing.core.*;
+//import processing.core.PVector;
 
-public class processing extends PApplet {
+public class Verarbeiten extends PApplet {
+
     // The argument passed to main must match the class name:
 	public static void main(String[] args) {
-		PApplet.main("app.processing");
+		PApplet.main("app.Verarbeiten");
 	}
-	// Method for setting the size of the window:
-	public void settings() {
-		size(600, 400);
-	}
+
     // Properties:
     int theBobDimension = 32;
     PVector anchor, theBob;
@@ -18,6 +16,11 @@ public class processing extends PApplet {
     PVector gravity;
     float restLength = 200;
     float k = (float) 0.01;
+
+	// Method for setting the size of the window:
+	public void settings() {
+		size(600, 400);
+	}
 
 	// Identical use to setup in Processing IDE except for size():
 	public void setup() {
@@ -27,8 +30,9 @@ public class processing extends PApplet {
         // xPos and yPos of the the bob, where the mass is concentrated at a single point:
         theBob = new PVector(300, 250);
         velocity = new PVector(0, 0);
-        gravity = new PVector(0, (float)0.1);
+        gravity = new PVector(0, (float)0.3);
 	}
+
 	// Identical use to draw in Processing IDE:
 	public void draw() {
 		background(112, 50, 126);
@@ -42,7 +46,7 @@ public class processing extends PApplet {
         // The bob:
         circle(theBob.x, theBob.y, theBobDimension);
 
-        if(mousePressed) {
+        if (mousePressed) {
             theBob.x = mouseX;
             theBob.y = mouseY;
             velocity.set(0, 0);
